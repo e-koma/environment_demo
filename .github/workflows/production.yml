@@ -1,4 +1,4 @@
-name: Environment Production Demo
+name: production deploy
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   production-approve:
-    name: Production - Approval Gate
+    name: 承認してください
     runs-on: ubuntu-latest
     environment: production-approve
     steps:
@@ -16,9 +16,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Approve deployment
-        run: |
-          echo "✅ Production deployment approved!"
-          echo "Proceeding with production jobs..."
+        run: echo "Production deployment approved!"
 
   production-jobA:
     name: Production - Job A
