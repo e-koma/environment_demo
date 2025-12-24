@@ -7,10 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
+  production-approve:
+    name: Production - Approval Gate
+    runs-on: ubuntu-latest
+    environment: production-approve
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Approve deployment
+        run: |
+          echo "✅ Production deployment approved!"
+          echo "Proceeding with production jobs..."
+
   production-jobA:
     name: Production - Job A
     runs-on: ubuntu-latest
     environment: production
+    needs: production-approve
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
