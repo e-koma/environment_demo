@@ -1,0 +1,124 @@
+name: Environment Demo
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # ========== staging ==========
+  staging-jobA:
+    name: Staging - Job A
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Run staging Job A
+        run: |
+          echo "Staging Job A is running..."
+          echo "Staging Job A completed!"
+
+  staging-jobB:
+    name: Staging - Job B
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: staging-jobA
+    steps:
+      - name: Run staging Job B
+        run: |
+          echo "Staging Job B is running..."
+          echo "Staging Job B completed!"
+
+  staging-jobC:
+    name: Staging - Job C
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: staging-jobA
+    steps:
+      - name: Run staging Job C
+        run: |
+          echo "Staging Job C is running..."
+          echo "Staging Job C completed!"
+
+  staging-jobD:
+    name: Staging - Job D
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: staging-jobA
+    steps:
+      - name: Run staging Job D
+        run: |
+          echo "Staging Job D is running..."
+          echo "Staging Job D completed!"
+
+  staging-jobE:
+    name: Staging - Job E
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: [staging-jobB, staging-jobC, staging-jobD]
+    steps:
+      - name: Run staging Job E
+        run: |
+          echo "Staging Job E is running..."
+          echo "✅ Staging Job E completed!"
+
+  # ========== production ==========
+  production-jobA:
+    name: Production - Job A
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Run production Job A
+        run: |
+          echo "Production Job A is running..."
+          echo "Production Job A completed!"
+
+  production-jobB:
+    name: Production - Job B
+    runs-on: ubuntu-latest
+    environment: production
+    needs: production-jobA
+    steps:
+      - name: Run production Job B
+        run: |
+          echo "Production Job B is running..."
+          echo "Production Job B completed!"
+
+  production-jobC:
+    name: Production - Job C
+    runs-on: ubuntu-latest
+    environment: production
+    needs: production-jobA
+    steps:
+      - name: Run production Job C
+        run: |
+          echo "Production Job C is running..."
+          echo "Production Job C completed!"
+
+  production-jobD:
+    name: Production - Job D
+    runs-on: ubuntu-latest
+    environment: production
+    needs: production-jobA
+    steps:
+      - name: Run production Job D
+        run: |
+          echo "Production Job D is running..."
+          echo "Production Job D completed!"
+
+  production-jobE:
+    name: Production - Job E
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [production-jobB, production-jobC, production-jobD]
+    steps:
+      - name: Run production Job E
+        run: |
+          echo "Production Job E is running..."
+          echo "✅ Production Job E completed!"
