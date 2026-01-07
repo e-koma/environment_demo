@@ -1,0 +1,76 @@
+name: production deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  production-approve:
+    name: 承認してください
+    runs-on: ubuntu-latest
+    environment: production-approve
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Approve deployment
+        run: echo "Production deployment approved!"
+
+  production-jobA:
+    name: Production - Job A
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Run production Job A
+        run: |
+          echo "Production Job A is running..."
+          echo "Production Job A completed!"
+
+  production-jobB:
+    name: Production - Job B
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [production-jobA, production-approve]
+    steps:
+      - name: Run production Job B
+        run: |
+          echo "Production Job B is running..."
+          echo "Production Job B completed!"
+
+  production-jobC:
+    name: Production - Job C
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [production-jobA, production-approve]
+    steps:
+      - name: Run production Job C
+        run: |
+          echo "Production Job C is running..."
+          echo "Production Job C completed!"
+
+  production-jobD:
+    name: Production - Job D
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [production-jobA, production-approve]
+    steps:
+      - name: Run production Job D
+        run: |
+          echo "Production Job D is running..."
+          echo "Production Job D completed!"
+
+  production-jobE:
+    name: Production - Job E
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [production-jobB, production-jobC, production-jobD]
+    steps:
+      - name: Run production Job E
+        run: |
+          echo "Production Job E is running..."
+          echo "✅ Production Job E completed!"
