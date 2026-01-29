@@ -10,7 +10,6 @@ jobs:
   production-approve:
     name: 承認してください
     runs-on: ubuntu-latest
-    timeout-minutes: 1
     environment: production-approve
     steps:
       - name: Checkout code
